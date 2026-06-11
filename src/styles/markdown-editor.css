@@ -1,0 +1,48 @@
+/* Structural styles for @plannotator/markdown-editor — theme-agnostic.
+ *
+ * Theming contract: atomic-editor reads `--atomic-editor-*` custom properties
+ * (see https://github.com/kenforthewin/atomic-editor for the full list). Set
+ * them on `.pn-markdown-editor` or any ancestor. A ready-made mapping for the
+ * Plannotator design-token system ships at:
+ *   @plannotator/markdown-editor/themes/plannotator.css
+ *
+ * IMPORTANT (light mode): atomic-editor declares its light palette directly ON
+ * `.atomic-cm-editor` under `[data-theme="light"]` (specificity 0,1,1), which
+ * BEATS variables inherited from a wrapper. Any theme that overrides color
+ * variables must re-declare them under
+ *   .pn-markdown-editor[data-theme='light'] .atomic-cm-editor { ... }
+ * (specificity 0,2,1) or the overrides silently lose in light mode. The
+ * bundled Plannotator theme does this; custom themes must too. */
+
+.pn-markdown-editor {
+	position: relative;
+	width: 100%;
+	/* Fills a height-bounded parent; CM6 scrolls internally. */
+	height: 100%;
+	min-height: 24rem;
+}
+
+.pn-markdown-editor-card {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	/* Card radius is deliberately NOT --atomic-editor-radius (that var sizes
+	 * editor internals like the table menu); override via the dedicated var. */
+	border-radius: var(--pn-markdown-editor-card-radius, 0.75rem);
+	background: var(--atomic-editor-bg, #1e1e1e);
+	padding-block: 0.75rem;
+}
+
+@media (min-width: 768px) {
+	.pn-markdown-editor-card {
+		padding-block: 1rem;
+	}
+}
+
+/* Host apps commonly apply global color/background transitions to `*`
+ * (theme-switch animation). CM6 mutates inline styles constantly while
+ * typing — exempt the editor DOM so input stays latency-free. */
+.pn-markdown-editor .atomic-cm-editor,
+.pn-markdown-editor .atomic-cm-editor * {
+	transition: none !important;
+}

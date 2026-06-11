@@ -1,0 +1,103 @@
+{
+	"name": "@plannotator/markdown-editor",
+	"version": "0.1.0",
+	"description": "Byte-faithful live-preview markdown editor (CodeMirror 6 / atomic-editor) — the raw markdown is the source of truth; rendering is decoration-only. Built for Plannotator's edit mode, reusable anywhere.",
+	"keywords": [
+		"codemirror",
+		"editor",
+		"live-preview",
+		"markdown",
+		"plannotator",
+		"react",
+		"wysiwyg"
+	],
+	"homepage": "https://github.com/plannotator/markdown-editor#readme",
+	"bugs": "https://github.com/plannotator/markdown-editor/issues",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/plannotator/markdown-editor.git"
+	},
+	"files": [
+		"dist"
+	],
+	"type": "module",
+	"sideEffects": [
+		"**/*.css"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./testing": {
+			"types": "./dist/testing.d.ts",
+			"import": "./dist/testing.js"
+		},
+		"./styles.css": "./dist/styles/markdown-editor.css",
+		"./themes/plannotator.css": "./dist/styles/themes/plannotator.css"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+		"lint": "oxlint",
+		"lint:fix": "oxlint --fix",
+		"format": "oxfmt --write .",
+		"format:check": "oxfmt --check .",
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"test": "vitest run",
+		"prepublishOnly": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+	},
+	"devDependencies": {
+		"@atomic-editor/editor": "^0.4.3",
+		"@codemirror/lang-javascript": "^6.2.5",
+		"@codemirror/lang-json": "^6.0.2",
+		"@codemirror/lang-python": "^6.2.1",
+		"@codemirror/lang-yaml": "^6.1.3",
+		"@codemirror/language": "^6.11.0",
+		"@codemirror/legacy-modes": "^6.5.3",
+		"@types/react": "^19.2.0",
+		"@types/react-dom": "^19.2.0",
+		"happy-dom": "^20.0.0",
+		"oxfmt": "^0.43.0",
+		"oxlint": "^1.58.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"typescript": "6.0.2",
+		"vitest": "^3.0.0"
+	},
+	"peerDependencies": {
+		"@atomic-editor/editor": "^0.4.0",
+		"@codemirror/lang-javascript": "^6.0.0",
+		"@codemirror/lang-json": "^6.0.0",
+		"@codemirror/lang-python": "^6.0.0",
+		"@codemirror/lang-yaml": "^6.0.0",
+		"@codemirror/language": "^6.0.0",
+		"@codemirror/legacy-modes": "^6.0.0",
+		"react": "^18.0.0 || ^19.0.0",
+		"react-dom": "^18.0.0 || ^19.0.0"
+	},
+	"peerDependenciesMeta": {
+		"@codemirror/lang-javascript": {
+			"optional": true
+		},
+		"@codemirror/lang-json": {
+			"optional": true
+		},
+		"@codemirror/lang-python": {
+			"optional": true
+		},
+		"@codemirror/lang-yaml": {
+			"optional": true
+		},
+		"@codemirror/legacy-modes": {
+			"optional": true
+		}
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"packageManager": "pnpm@10.18.0"
+}
