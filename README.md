@@ -7,10 +7,12 @@ We pulled this out of [Plannotator](https://github.com/backnotprop/plannotator)'
 ## Install
 
 ```sh
-pnpm add @plannotator/markdown-editor @atomic-editor/editor @codemirror/language react react-dom
+pnpm add @plannotator/markdown-editor
 # optional, for the default fenced-code grammar set:
 pnpm add @codemirror/lang-javascript @codemirror/lang-python @codemirror/lang-json @codemirror/lang-yaml @codemirror/legacy-modes
 ```
+
+React and the CodeMirror packages are peer dependencies. pnpm, npm 7+, and bun install them automatically. They're peers (not bundled) because your app must share one copy of React and one copy of CM6 with the editor: the `codeLanguages` prop takes `LanguageDescription` objects you build from your own `@codemirror/language`, and CM6 breaks when two copies of `@codemirror/state` coexist.
 
 ## Use
 
