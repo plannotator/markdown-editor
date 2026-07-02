@@ -11,7 +11,7 @@ export default defineConfig({
 			deps: {
 				// atomic-editor's published dist uses extensionless ESM imports,
 				// which Node's resolver rejects — route it through Vite instead.
-				inline: ["@atomic-editor/editor"],
+				inline: ["@plannotator/atomic-editor"],
 			},
 		},
 	},

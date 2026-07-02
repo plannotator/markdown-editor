@@ -1,6 +1,6 @@
 # @plannotator/markdown-editor
 
-Live-preview markdown editor for React, built on [atomic-editor](https://github.com/kenforthewin/atomic-editor) (CodeMirror 6). The raw markdown text is the source of truth. Rendering is decoration only, so loading a document and reading it back is byte-identical. A one-word edit produces a one-word diff.
+Live-preview markdown editor for React, built on [our fork](https://github.com/plannotator/atomic-editor) of [atomic-editor](https://github.com/kenforthewin/atomic-editor) (CodeMirror 6). The raw markdown text is the source of truth. Rendering is decoration only, so loading a document and reading it back is byte-identical. A one-word edit produces a one-word diff.
 
 We pulled this out of [Plannotator](https://github.com/backnotprop/plannotator)'s edit mode, where user edits travel to AI agents as unified diffs. That workflow breaks the moment an editor normalizes markdown it didn't touch: bullet markers, escaping, spacing. This package makes the guarantee reusable and enforces it by test.
 
@@ -71,7 +71,7 @@ If this fails on your content, file an issue. It's the package's core contract. 
 
 ## Relationship to atomic-editor
 
-This is a thin wrapper, on purpose. Upstream is actively maintained and we want its fixes. The package boundary is the insurance: if upstream goes quiet for 6+ months, blocks a feature we need, or won't merge a fix we require, we fork it into this org and swap the internal dependency. Consumers see nothing. Until one of those happens, we don't fork.
+This is a thin wrapper over [`@plannotator/atomic-editor`](https://github.com/plannotator/atomic-editor), our fork of [atomic-editor](https://github.com/kenforthewin/atomic-editor). We forked because we needed parser-level changes the wrapper couldn't provide (first: YAML frontmatter support, which upstream misparses as a rule plus heading). The fork tracks upstream closely, and we offer our changes back as PRs — it's a delta, not a divergence.
 
 ## Development
 

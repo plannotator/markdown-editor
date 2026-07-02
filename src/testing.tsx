@@ -9,8 +9,8 @@
  */
 import { createRoot } from "react-dom/client";
 import { act } from "react";
-import { AtomicCodeMirrorEditor } from "@atomic-editor/editor";
-import type { AtomicCodeMirrorEditorHandle } from "@atomic-editor/editor";
+import { AtomicCodeMirrorEditor } from "@plannotator/atomic-editor";
+import type { AtomicCodeMirrorEditorHandle } from "@plannotator/atomic-editor";
 
 /** Mounts the editor with `markdown`, reads it back via getMarkdown(), unmounts. */
 export async function roundTrip(markdown: string): Promise<string> {

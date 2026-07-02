@@ -1,9 +1,9 @@
 import type { MutableRefObject } from "react";
 import { useMemo } from "react";
-import { AtomicCodeMirrorEditor } from "@atomic-editor/editor";
-import type { AtomicCodeMirrorEditorHandle } from "@atomic-editor/editor";
+import { AtomicCodeMirrorEditor } from "@plannotator/atomic-editor";
+import type { AtomicCodeMirrorEditorHandle } from "@plannotator/atomic-editor";
 import type { LanguageDescription } from "@codemirror/language";
-import "@atomic-editor/editor/styles.css";
+import "@plannotator/atomic-editor/styles.css";
 import "./styles/markdown-editor.css";
 import { DEFAULT_CODE_LANGUAGES } from "./code-languages.js";
 

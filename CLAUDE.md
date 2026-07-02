@@ -35,7 +35,14 @@ src/
 
 ## Upstream policy
 
-atomic-editor is a single-maintainer project we deliberately did NOT fork — it's alive and we want its fixes. Fork triggers (then swap the dependency internally; consumers unaffected): upstream silent >6 months, blocks a needed feature, or a required fix won't merge. Until then, workarounds live in this package's CSS/wrapper, never in patched node_modules.
+We consume `@plannotator/atomic-editor` — our fork of kenforthewin/atomic-editor at github.com/plannotator/atomic-editor. Forked 2026-07: frontmatter support required parser-level changes the wrapper couldn't reach (the `markdown()` language is constructed inside the editor; consumer extensions can't add lezer block parsers to it).
+
+Fork discipline, so this stays a delta and not a divergence:
+
+- Each substantive change lives on its own branch cut from upstream `main` (e.g. `frontmatter`) and is offered upstream as a PR.
+- The fork's `main` = upstream `main` + those branches + one package-identity commit (name/version/repo metadata only). Internal aliases and demo imports keep the `@atomic-editor/editor` string on purpose — it keeps upstream merges trivial.
+- Merge upstream releases promptly; drop any branch upstream absorbs.
+- Styling/behavior workarounds still belong in THIS package's CSS/wrapper first. The fork is only for what editor internals alone can do.
 
 ## Releasing
 
