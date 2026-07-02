@@ -1,6 +1,6 @@
 {
 	"name": "@plannotator/markdown-editor",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Live-preview markdown editor for React (CodeMirror 6, atomic-editor). Raw markdown is the source of truth: rendering is decoration only, edits round-trip byte-identical.",
 	"keywords": [
 		"codemirror",
