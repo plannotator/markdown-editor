@@ -57,13 +57,32 @@ One gotcha that cost us a debugging session. atomic-editor declares its light pa
 ## The fidelity guarantee (test it in your app)
 
 ```ts
-// vitest, environment: 'happy-dom' (jsdom won't work, CM6 needs layout)
+// vitest — full config below; jsdom won't work, CM6 needs layout
 import { roundTrip } from "@plannotator/markdown-editor/testing";
 
 test("my corpus round-trips byte-identically", async () => {
 	for (const doc of myDocuments) {
 		expect(await roundTrip(doc)).toBe(doc);
 	}
+});
+```
+
+```ts
+// vitest.config.ts
+export default defineConfig({
+	test: {
+		environment: "happy-dom",
+		setupFiles: ["./setup.ts"], // must set: globalThis.IS_REACT_ACT_ENVIRONMENT = true
+		server: {
+			deps: {
+				// Both packages must run through Vite: the editor's dist uses
+				// extensionless ESM imports Node's resolver rejects, and once
+				// Node loads this package natively the editor underneath is
+				// loaded natively too.
+				inline: ["@plannotator/markdown-editor", "@plannotator/atomic-editor"],
+			},
+		},
+	},
 });
 ```
 
