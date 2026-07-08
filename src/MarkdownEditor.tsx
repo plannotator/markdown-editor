@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { AtomicCodeMirrorEditor } from "@plannotator/atomic-editor";
 import type { AtomicCodeMirrorEditorHandle } from "@plannotator/atomic-editor";
 import type { LanguageDescription } from "@codemirror/language";
+import type { Extension } from "@codemirror/state";
 import "@plannotator/atomic-editor/styles.css";
 import "./styles/markdown-editor.css";
 import { DEFAULT_CODE_LANGUAGES } from "./code-languages.js";
@@ -31,6 +32,14 @@ export interface MarkdownEditorProps {
 	className?: string;
 	/** Extra class on the inner card (e.g. shadow / border / inline padding). */
 	cardClassName?: string;
+	/** Extra CodeMirror 6 extensions, forwarded verbatim to the underlying
+	 *  editor and appended after its built-ins (so they compose on top —
+	 *  e.g. collaboration bindings such as y-codemirror.next, custom keymaps
+	 *  wrapped in Prec.high, update listeners). Build them against your own
+	 *  CM6 packages; the editor breaks if two copies of @codemirror/state
+	 *  coexist. Extensions that rewrite document text void the byte-fidelity
+	 *  guarantee — that contract covers only what the editor itself does. */
+	extensions?: readonly Extension[];
 }
 
 /**
@@ -55,6 +64,7 @@ export function MarkdownEditor({
 	maxWidth,
 	className,
 	cardClassName,
+	extensions,
 }: MarkdownEditorProps) {
 	const containerStyle = useMemo(
 		() => (maxWidth === null ? undefined : { maxWidth: maxWidth ?? 832 }),
@@ -75,6 +85,7 @@ export function MarkdownEditor({
 					onMarkdownChange={onMarkdownChange}
 					onLinkClick={onLinkClick}
 					codeLanguages={codeLanguages ?? DEFAULT_CODE_LANGUAGES}
+					extensions={extensions}
 				/>
 			</div>
 		</div>

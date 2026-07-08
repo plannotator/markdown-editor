@@ -46,6 +46,7 @@ How it behaves:
 - **Uncontrolled after mount.** `markdown` is read once, then the editor owns the text. Read it back with `editorHandleRef.current.getMarkdown()`. Swap documents by changing `documentId`.
 - **`mode`**: pass your app's resolved `'dark' | 'light'`. The light palette switches via `data-theme="light"` on the wrapper.
 - **`codeLanguages`**: defaults to a small js/ts/python/json/yaml/shell set (`DEFAULT_CODE_LANGUAGES`). Pass your own `LanguageDescription[]` to change it. Watch out: bundlers with `inlineDynamicImports` (single-file builds) inline every listed grammar.
+- **`extensions`**: extra CodeMirror 6 extensions, forwarded verbatim to the editor and appended after its built-ins. This is the hook for live collaboration (e.g. `y-codemirror.next`), custom keymaps, or update listeners — the package stays provider-agnostic and ships no collaboration code of its own. Build extensions against your own CM6 packages (one shared copy of `@codemirror/state`, as above). Extensions that rewrite document text void the byte-fidelity guarantee; the contract covers what the editor itself does.
 - **`className` / `cardClassName`**: extra classes on the wrapper and inner card, for stacking, shadows, or padding your app needs.
 
 ## Theming
