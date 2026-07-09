@@ -4,6 +4,17 @@ All notable changes to this package will be documented in this file.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions
 follow [SemVer](https://semver.org) (pre-1.0: minors may break).
 
+## [0.3.1]
+
+### Changed
+
+- `@plannotator/atomic-editor` peer range widened to `^0.5.0 || ^0.6.0`.
+  Engine 0.6.0 adds two opt-in UI extensions that compose through this
+  package's `extensions` prop with no wrapper changes: `slashCommands()`
+  (insert menu on `/`) and `selectionToolbar()` (floating formatting bar,
+  multi-line and table-cell aware), both themeable via the new
+  `--atomic-editor-menu-*` variables. README shows the wiring.
+
 ## [0.3.0]
 
 ### Added
