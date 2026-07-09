@@ -4,6 +4,17 @@ All notable changes to this package will be documented in this file.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions
 follow [SemVer](https://semver.org) (pre-1.0: minors may break).
 
+## [0.3.2]
+
+### Changed
+
+- `@plannotator/atomic-editor` peer range widened to include `^0.7.0` —
+  engine 0.7.0 brings the Linear-style table pass (hover add-row/column
+  controls, density, corruption fix for hand-typed rows) and
+  `preferResolvedLabel` on `wikiLinks()` for rename-propagating wiki links.
+  All engine features compose through the `extensions` prop; no wrapper
+  code changes.
+
 ## [0.3.1]
 
 ### Changed
