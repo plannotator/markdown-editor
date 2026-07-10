@@ -115,7 +115,7 @@ There is also a parked idea: moving the CM6 packages from peerDependencies to re
 ## Pointers
 
 - Package repo: https://github.com/plannotator/markdown-editor (CI: lint, format, typecheck, test, build)
-- npm: `@plannotator/markdown-editor` (0.1.0)
+- npm: `@plannotator/markdown-editor` (0.4.0)
 - Feature PR: https://github.com/backnotprop/plannotator/pull/890
 - Umbrella issue and roadmap: https://github.com/backnotprop/plannotator/issues/887
 - Monorepo touch points: `packages/ui/components/MarkdownEditor.tsx` (shim), `packages/editor/App.tsx` (state machine, search for `commitMarkdownEdits`), `packages/ui/markdownEditorFidelity.test.tsx` (corpus test), `packages/ui/test-setup/happy-dom.ts` (opt-in DOM preload), `bunfig.toml` (release-age exception)
