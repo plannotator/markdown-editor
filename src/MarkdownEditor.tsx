@@ -1,5 +1,4 @@
 import type { MutableRefObject } from "react";
-import { useMemo } from "react";
 import { AtomicCodeMirrorEditor } from "@plannotator/atomic-editor";
 import type { AtomicCodeMirrorEditorHandle } from "@plannotator/atomic-editor";
 import type { LanguageDescription } from "@codemirror/language";
@@ -7,6 +6,7 @@ import type { Extension } from "@codemirror/state";
 import "@plannotator/atomic-editor/styles.css";
 import "./styles/markdown-editor.css";
 import { DEFAULT_CODE_LANGUAGES } from "./code-languages.js";
+import { MarkdownSurface } from "./MarkdownSurface.js";
 
 export type MarkdownEditorHandle = AtomicCodeMirrorEditorHandle;
 
@@ -66,28 +66,24 @@ export function MarkdownEditor({
 	cardClassName,
 	extensions,
 }: MarkdownEditorProps) {
-	const containerStyle = useMemo(
-		() => (maxWidth === null ? undefined : { maxWidth: maxWidth ?? 832 }),
-		[maxWidth],
-	);
-
 	return (
-		<div
-			className={`pn-markdown-editor${className ? ` ${className}` : ""}`}
-			data-theme={mode === "light" ? "light" : undefined}
-			style={containerStyle}
+		<MarkdownSurface
+			variant="editor"
+			defaultMaxWidth={832}
+			mode={mode}
+			maxWidth={maxWidth}
+			className={className}
+			cardClassName={cardClassName}
 		>
-			<div className={`pn-markdown-editor-card${cardClassName ? ` ${cardClassName}` : ""}`}>
-				<AtomicCodeMirrorEditor
-					documentId={documentId}
-					markdownSource={markdown}
-					editorHandleRef={editorHandleRef}
-					onMarkdownChange={onMarkdownChange}
-					onLinkClick={onLinkClick}
-					codeLanguages={codeLanguages ?? DEFAULT_CODE_LANGUAGES}
-					extensions={extensions}
-				/>
-			</div>
-		</div>
+			<AtomicCodeMirrorEditor
+				documentId={documentId}
+				markdownSource={markdown}
+				editorHandleRef={editorHandleRef}
+				onMarkdownChange={onMarkdownChange}
+				onLinkClick={onLinkClick}
+				codeLanguages={codeLanguages ?? DEFAULT_CODE_LANGUAGES}
+				extensions={extensions}
+			/>
+		</MarkdownSurface>
 	);
 }

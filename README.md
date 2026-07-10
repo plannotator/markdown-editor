@@ -41,6 +41,32 @@ function Editor({ doc }: { doc: string }) {
 const text = handle.current?.getMarkdown();
 ```
 
+### Frozen document diff
+
+`MarkdownDiff` renders two revisions as one read-only document: newer text in place, additions
+highlighted, deletions struck through where they used to be, and a keyboard-accessible change
+overview at the review pane's right edge. The full document remains visible; unchanged regions are
+never collapsed.
+
+```tsx
+import { MarkdownDiff } from "@plannotator/markdown-editor";
+import "@plannotator/markdown-editor/themes/plannotator.css";
+
+<div style={{ height: "80vh" }}>
+	<MarkdownDiff
+		originalMarkdown={savedRevision}
+		modifiedMarkdown={currentRevision}
+		documentId={`${documentId}:${fromVersion}:${toVersion}`}
+		mode="dark"
+	/>
+</div>;
+```
+
+The complete diff surface is unconstrained by default so the overview rail stays attached to the
+review pane edge. Set `maxWidth` to constrain the document and rail together, or pass
+`showOverview={false}` when the host supplies its own navigation. The `extensions` seam is the same
+one used by `MarkdownEditor`, including its capture-on-mount contract.
+
 How it behaves:
 
 - **Uncontrolled after mount.** `markdown` is read once, then the editor owns the text. Read it back with `editorHandleRef.current.getMarkdown()`. Swap documents by changing `documentId`.

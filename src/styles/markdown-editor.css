@@ -22,6 +22,12 @@
 	min-height: 24rem;
 }
 
+/* Diff consumers commonly mount inside an existing min-h-0 pane. Do not let
+ * the editable surface's standalone floor force an outer page scrollbar. */
+.pn-markdown-diff {
+	min-height: 0;
+}
+
 .pn-markdown-editor-card {
 	width: 100%;
 	height: 100%;
@@ -31,6 +37,12 @@
 	border-radius: var(--pn-markdown-editor-card-radius, 0.75rem);
 	background: var(--atomic-editor-bg, #1e1e1e);
 	padding-block: 0.75rem;
+}
+
+/* The frozen diff owns its toolbar and document padding. Keep those controls
+ * flush with the card instead of inheriting the editable surface's runway. */
+.pn-markdown-diff .pn-markdown-editor-card {
+	padding-block: 0;
 }
 
 @media (min-width: 768px) {

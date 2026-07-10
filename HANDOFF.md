@@ -30,8 +30,10 @@ atomic-editor takes the opposite approach. The CM6 document IS the markdown text
 
 ```
 src/
-├── index.ts            # Exports: MarkdownEditor, types, DEFAULT_CODE_LANGUAGES
+├── index.ts            # Exports: MarkdownEditor, MarkdownDiff, types, defaults
 ├── MarkdownEditor.tsx  # The component
+├── MarkdownDiff.tsx    # Frozen two-revision review surface
+├── MarkdownSurface.tsx # Shared theme/layout frame
 ├── code-languages.ts   # Default grammar set: js/ts, python, json, yaml, shell
 ├── testing.tsx         # roundTrip() helper, exported at ./testing
 └── styles/
@@ -46,6 +48,10 @@ Component semantics, the parts people get wrong:
 - **The wrapper needs a height-bounded parent.** The editor fills it and scrolls internally, with a 40vh bottom runway like Obsidian.
 - **`mode` is a prop**, not context. The package has no theme provider; the host passes its resolved `'dark' | 'light'`.
 - **`codeLanguages` accepts `LanguageDescription[]`.** The defaults cover what plans contain. Bundlers with `inlineDynamicImports` (Plannotator's single-file build) inline every listed grammar, so the list stays lean.
+- **`MarkdownDiff` is frozen and controlled by its two revisions.** Changing either text rebuilds
+  the comparison. Its complete surface is unconstrained by default so the overview stays at the
+  host pane edge; `maxWidth` constrains the document and rail together. Consumer extensions,
+  language arrays, and custom diff config are captured by the mounted comparison.
 
 ### The fidelity contract
 
@@ -99,7 +105,10 @@ The flow:
 
 ## Upstream policy
 
-atomic-editor is a single-maintainer project we deliberately did NOT fork. It's alive and we want its fixes. Fork triggers: upstream silent for 6+ months, blocks a feature we need, or won't merge a fix we require. If one fires, fork into this org and swap the dependency inside this package; consumers see nothing. Until then, workarounds live in this package's CSS and wrapper.
+This package consumes `@plannotator/atomic-editor`, our narrow fork of atomic-editor. The fork is
+reserved for editor-internal work the wrapper cannot express—parser extensions, CM6 state, widgets,
+and the frozen merge view. Styling and host policy stay here first. Each substantive engine feature
+lives on its own branch cut from upstream main so the fork remains a delta rather than a divergence.
 
 There is also a parked idea: moving the CM6 packages from peerDependencies to regular dependencies for a fully self-contained install (v0.2.0). Decided "fine for now" since pnpm/npm/bun auto-install peers anyway.
 

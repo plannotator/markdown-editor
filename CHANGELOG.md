@@ -4,6 +4,14 @@ All notable changes to this package will be documented in this file.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions
 follow [SemVer](https://semver.org) (pre-1.0: minors may break).
 
+## [Unreleased]
+
+### Added
+
+- `MarkdownDiff`, a themed frozen-document wrapper over atomic-editor's unified diff surface. It
+  preserves both revisions byte-for-byte, composes consumer CM6 extensions, keeps the complete
+  document visible, and defaults the overview rail to the review pane's right edge.
+
 ## [0.3.2]
 
 ### Changed

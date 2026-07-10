@@ -10,8 +10,10 @@ React wrapper around atomic-editor (CodeMirror 6) providing a byte-faithful live
 
 ```
 src/
-├── index.ts            # Public exports: MarkdownEditor, types, DEFAULT_CODE_LANGUAGES
+├── index.ts            # Public exports: MarkdownEditor, MarkdownDiff, types, defaults
 ├── MarkdownEditor.tsx  # The component — thin, uncontrolled-after-mount wrapper
+├── MarkdownDiff.tsx    # Frozen two-revision review wrapper
+├── MarkdownSurface.tsx # Shared theme/layout frame for both surfaces
 ├── code-languages.ts   # Default lazy-loaded grammar set (lean on purpose)
 ├── testing.tsx         # roundTrip() helper — the fidelity assertion, exported at ./testing
 └── styles/
