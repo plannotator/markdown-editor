@@ -84,6 +84,15 @@ How it behaves:
 
     `slashCommands()` is a Notion-style insert menu on `/` at the start of a line; `selectionToolbar()` is a floating bold/italic/strike/code/link bar over selected text (works multi-line and inside table cells). Both are themeable via the `--atomic-editor-menu-*` CSS variables and documented in the [atomic-editor changelog](https://github.com/plannotator/atomic-editor/blob/main/CHANGELOG.md).
 
+    Engine 0.9.0 adds `linkWidgets()`, which draws a single-line `[text](url)` link as your own CM6 widget while the markdown stays the link. The engine decides when the widget yields to the raw source (caret inside or at an edge, focus, pointer-press freeze, diff changes); dispatch `refreshLinkWidgets` when your answer changes without a document edit:
+
+    ```tsx
+    import { linkWidgets, refreshLinkWidgets } from "@plannotator/atomic-editor";
+
+    <MarkdownEditor extensions={[linkWidgets({ match: ({ url, text }) => chipFor(url, text) })]} ... />
+    // later: view.dispatch({ effects: refreshLinkWidgets.of(null) })
+    ```
+
 - **`className` / `cardClassName`**: extra classes on the wrapper and inner card, for stacking, shadows, or padding your app needs.
 
 ## Theming

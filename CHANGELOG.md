@@ -4,6 +4,17 @@ All notable changes to this package will be documented in this file.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions
 follow [SemVer](https://semver.org) (pre-1.0: minors may break).
 
+## [0.5.0]
+
+### Changed
+
+- `@plannotator/atomic-editor` peer range widened to `^0.8.0 || ^0.9.0`; the dev engine is
+  `^0.9.0`. Engine 0.9.0 adds `linkWidgets()` and `refreshLinkWidgets`, a host seam that draws a
+  single-line `[text](url)` link as the host's own widget (a chip, a mention) while the markdown
+  stays the link byte for byte. It composes through the `extensions` prop with no wrapper code
+  changes; `test/link-widgets.test.tsx` guards that path and the fidelity rule. Links inside table
+  cells keep the link look in engine 0.9.0.
+
 ## [0.4.0]
 
 ### Added
